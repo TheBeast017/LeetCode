@@ -17,4 +17,3 @@ class Solution(object):
                 return rd + 1, rn
             return ld + 1, node
         return dfs(root)[1]
-        
