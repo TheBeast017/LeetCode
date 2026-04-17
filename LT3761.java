@@ -1,29 +1,25 @@
-class Solution {
-    public int minMirrorPairDistance(int[] nums) {
-        int MAX = 1000000;
-        int[] pos = new int[MAX];
-        Arrays.fill(pos, -1);
+class Solution{
+    public int minMirrorPairDistance(int[] nums){
+        Map<Integer,Integer> map=new HashMap<>();
+        int min=Integer.MAX_VALUE;
 
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-
-            if (num < MAX && pos[num] != -1) {
-                min = Math.min(min, i - pos[num]);
+        for(int i=0;i<nums.length;i++){
+            if(map.containsKey(nums[i])){
+                min=Math.min(min,i-map.get(nums[i]));
+                if(min==1)return 1;
             }
-            int rev = reverse(num);
-            if (rev < MAX) {
-                pos[rev] = i;
-            }
+            int rev=reverse(nums[i]);
+            map.put(rev,i);
         }
-        return min == Integer.MAX_VALUE ? -1 : min;
+
+        return min==Integer.MAX_VALUE?-1:min;
     }
 
     private int reverse(int x){
-        int r = 0;
-        while (x > 0) {
-            r = r * 10 + x % 10;
-            x /= 10;
+        int r=0;
+        while(x>0){
+            r=r*10+x%10;
+            x/=10;
         }
         return r;
     }
