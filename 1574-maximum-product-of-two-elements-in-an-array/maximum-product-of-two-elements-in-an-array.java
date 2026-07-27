@@ -11,6 +11,7 @@ class Solution {
             max2=num;
         }
        }
+       System.gc();
        return (max1 - 1)*(max2 -1);
     }
 }
